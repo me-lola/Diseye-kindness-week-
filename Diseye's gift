@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kindness Week</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+font-family: "Comic Sans MS", cursive;
+background: linear-gradient(135deg,#ffc0cb,#ff69b4,#ff85c1);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.container{
+max-width:700px;
+z-index:2;
+}
+
+h1{
+font-size:55px;
+text-shadow:0 0 15px white;
+}
+
+#text{
+font-size:24px;
+margin-top:20px;
+min-height:150px;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff1493;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:float linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh) scale(1);}
+100%{transform:translateY(-10vh) scale(1.5);}
+}
+
+.sparkle{
+position:absolute;
+font-size:14px;
+animation:spark 2s linear forwards;
+}
+
+@keyframes spark{
+0%{opacity:1; transform:scale(0);}
+100%{opacity:0; transform:scale(2);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Happy Kindness Week 💗</h1>
+<div id="text"></div>
+<button onclick="surprise()">Press for a surprise</button>
+</div>
+
+<script>
+
+const message = `Happy kindness week my baby.
+
+I know we fight a ridiculous amount of times for the most stupid reasons but you still mean a lot to me, never forget that.
+
+Thank you Soo much for being there for me and I hope to be there for you for the rest of our lives 🫶.
+
+Beautiful Diseye`;
+
+let i = 0;
+function typeText(){
+if(i < message.length){
+document.getElementById("text").innerHTML += message.charAt(i);
+i++;
+setTimeout(typeText,40);
+}
+}
+typeText();
+
+function createHeart(){
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},8000);
+}
+setInterval(createHeart,300);
+
+function sparkle(x,y){
+const s=document.createElement("div");
+s.classList.add("sparkle");
+s.innerHTML="✨";
+s.style.left=x+"px";
+s.style.top=y+"px";
+document.body.appendChild(s);
+
+setTimeout(()=>s.remove(),2000);
+}
+
+document.addEventListener("mousemove",(e)=>{
+sparkle(e.clientX,e.clientY);
+});
+
+document.addEventListener("click",(e)=>{
+for(let i=0;i<8;i++){
+const h=document.createElement("div");
+h.innerHTML="💖";
+h.style.position="absolute";
+h.style.left=e.clientX+"px";
+h.style.top=e.clientY+"px";
+h.style.fontSize="20px";
+h.style.transition="1s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+h.style.opacity=0;
+},10);
+
+setTimeout(()=>h.remove(),1000);
+}
+});
+
+function surprise(){
+alert("You are loved more than you know 💕");
+}
+
+</script>
+
+</body>
+</html>
